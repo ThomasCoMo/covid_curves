@@ -65,7 +65,7 @@ for (i in 1:length(plot_data$X1)){
 # plot data
 plot_data_sum = ddply(plot_data, c('X4'),summarise,cases=sum(X2),death=sum(X3))
 semaineEnCours = strftime(Sys.Date(),format="%V")
-p1=ggplot(data=plot_data, aes())+geom_line(aes(x=X1, y=X2,group=1,color='cases'))+geom_line(aes(x=X1, y=X3,group=1,color='deaths'))+ylim(0,77000)+labs(x='date',y='number of cases/deaths')+ggtitle('number of cases/deaths per day')+theme(plot.title = element_text(hjust = 0.5))
+p1=ggplot(data=plot_data, aes())+geom_line(aes(x=X1, y=X2,group=1,color='cases'))+geom_line(aes(x=X1, y=X3,group=1,color='deaths'))+labs(x='date',y='number of cases/deaths')+ggtitle('number of cases/deaths per day')+theme(plot.title = element_text(hjust = 0.5))
 ggsave(paste("data_",Sys.Date(),'.png',sep=""), plot = p1)
 p2=ggplot(plot_data_sum,aes())+geom_line(aes(X4,cases,group=1,color='cases'))+scale_y_continuous(trans = 'log10')+geom_line(aes(X4,death,group=1,color='deaths'))+labs(x='week',y='number of cases/deaths')+ ggtitle(paste('number of cases/deaths in function of the week (current week: ',semaineEnCours,')',sep = ""))+theme(plot.title = element_text(hjust = 0.5))
 ggsave(paste("data_",Sys.Date(),'perweek.png',sep=""), plot = p2)
